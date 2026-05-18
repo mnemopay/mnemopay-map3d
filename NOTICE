@@ -1,0 +1,48 @@
+@mnemopay/map3d
+Copyright (c) 2026 Jeremiah Omiagbo / J&B Enterprise LLC. All rights reserved.
+
+Original author: Jeremiah Omiagbo (info@getbizsuite.com)
+First published: May 2026 (npm: @mnemopay/map3d v0.0.1)
+GitHub: https://github.com/mnemopay/mnemopay-map3d
+
+This software is licensed under the Apache License, Version 2.0
+(see LICENSE file). Apache 2.0 permits use, modification, and
+redistribution; it does not grant rights to claim original authorship.
+
+─── Inspiration / prior art ────────────────────────────────────────────────
+
+This project's surface area (R3F + OSM Overpass → extruded buildings →
+GLB export) was inspired by:
+
+  cartesiancs/map3d (MIT, https://github.com/cartesiancs/map3d)
+  Copyright (c) 2024 cartesiancs
+
+@mnemopay/map3d is an independent implementation. No source code was
+copied; the architecture pattern is the only thing shared, and that
+pattern is itself common across OSM-3D projects (Overpass → footprint →
+extrude → render). The cartesiancs/map3d README is acknowledged here
+for community attribution, not for any license obligation.
+
+─── Data attribution ──────────────────────────────────────────────────────
+
+Building and road data fetched at runtime from the OpenStreetMap
+Overpass API:
+
+  © OpenStreetMap contributors
+  Licensed under the Open Database License (ODbL)
+  https://www.openstreetmap.org/copyright
+
+Consumers of this package who render OSM-derived geometry on a
+user-facing surface MUST display the attribution string
+"© OpenStreetMap contributors" near the map or in an "about" link,
+per ODbL §4.3.
+
+─── Third-party runtime dependencies ──────────────────────────────────────
+
+  three                  (MIT)  — https://github.com/mrdoob/three.js
+  @react-three/fiber     (MIT)  — https://github.com/pmndrs/react-three-fiber
+  react                  (MIT)  — https://github.com/facebook/react
+
+These are peer dependencies; no source code is bundled.
+
+For attribution inquiries: info@getbizsuite.com

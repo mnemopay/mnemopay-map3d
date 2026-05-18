@@ -1,0 +1,56 @@
+{
+  "name": "@mnemopay/map3d",
+  "version": "0.0.1",
+  "description": "Browser-native 3D city map renderer. OSM → buildings + roads → R3F + Three.js → GLB. Drop-in for Dele, Forge, or any React app.",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": { "import": "./dist/index.js", "types": "./dist/index.d.ts" },
+    "./overpass": { "import": "./dist/overpass.js", "types": "./dist/overpass.d.ts" },
+    "./buildings": { "import": "./dist/buildings.js", "types": "./dist/buildings.d.ts" },
+    "./roads": { "import": "./dist/roads.js", "types": "./dist/roads.d.ts" },
+    "./exporter": { "import": "./dist/exporter.js", "types": "./dist/exporter.d.ts" },
+    "./react": { "import": "./dist/react.js", "types": "./dist/react.d.ts" }
+  },
+  "files": ["dist", "README.md", "LICENSE", "NOTICE"],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "tsc --noEmit",
+    "demo": "vite examples/demo",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "3d-map", "openstreetmap", "osm", "overpass", "three", "three-js",
+    "react-three-fiber", "r3f", "webgpu", "city-map", "glb", "buildings",
+    "mnemopay", "digital-twin"
+  ],
+  "author": "J&B Enterprise LLC <info@getbizsuite.com>",
+  "license": "Apache-2.0",
+  "repository": { "type": "git", "url": "git+https://github.com/mnemopay/mnemopay-map3d.git" },
+  "homepage": "https://github.com/mnemopay/mnemopay-map3d",
+  "bugs": { "url": "https://github.com/mnemopay/mnemopay-map3d/issues" },
+  "peerDependencies": {
+    "three": ">=0.160.0",
+    "react": ">=18.0.0",
+    "@react-three/fiber": ">=8.15.0"
+  },
+  "peerDependenciesMeta": {
+    "react": { "optional": true },
+    "@react-three/fiber": { "optional": true }
+  },
+  "devDependencies": {
+    "@react-three/fiber": "^8.17.0",
+    "@types/node": "^22.5.0",
+    "@types/react": "^18.3.0",
+    "@types/three": "^0.168.0",
+    "react": "^18.3.0",
+    "three": "^0.168.0",
+    "typescript": "^5.5.0",
+    "vite": "^5.4.0",
+    "vitest": "^2.0.0"
+  },
+  "publishConfig": { "access": "public" }
+}

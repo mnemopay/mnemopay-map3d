@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@mnemopay/map3d — demo</title>
+    <style>
+      :root { color-scheme: dark; }
+      html, body, #root { margin: 0; height: 100%; background: #05070e; color: #e9e7e2; font-family: system-ui; }
+      .panel {
+        position: absolute; top: 16px; left: 16px; z-index: 10;
+        background: rgba(8,10,18,0.85); padding: 14px 16px; border-radius: 10px;
+        border: 1px solid rgba(255,255,255,0.08); max-width: 320px; line-height: 1.4;
+      }
+      .panel h1 { font-size: 14px; margin: 0 0 8px; font-weight: 600; letter-spacing: 0.02em; }
+      .panel select, .panel button {
+        font: inherit; background: #11141d; color: inherit;
+        border: 1px solid rgba(255,255,255,0.12); padding: 6px 10px;
+        border-radius: 6px; margin-right: 6px; cursor: pointer;
+      }
+      .panel button:hover { background: #1a1e29; }
+      .panel small { display: block; opacity: 0.6; margin-top: 8px; font-size: 11px; }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="./main.tsx"></script>
+  </body>
+</html>
