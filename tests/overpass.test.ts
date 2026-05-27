@@ -1,6 +1,10 @@
-import { describe, it, expect } from 'vitest';
-import { buildingsAndRoadsQuery, elementsToScene } from '../src/overpass.js';
+import { afterEach, describe, it, expect, vi } from 'vitest';
+import { buildingsAndRoadsQuery, elementsToScene, fetchOverpass } from '../src/overpass.js';
 import type { OsmElement } from '../src/types.js';
+
+afterEach(() => {
+  vi.unstubAllGlobals();
+});
 
 describe('buildingsAndRoadsQuery', () => {
   it('includes the bbox tuple in the correct (S,W,N,E) order', () => {
@@ -8,6 +12,42 @@ describe('buildingsAndRoadsQuery', () => {
     expect(q).toContain('(1,2,3,4)');
     expect(q).toContain('building');
     expect(q).toContain('highway');
+  });
+});
+
+describe('fetchOverpass', () => {
+  it('sends an attributed default user agent from Node bake callers', async () => {
+    const fetchMock = vi.fn().mockResolvedValue({
+      ok: true,
+      json: async () => ({ elements: [] }),
+    });
+    vi.stubGlobal('fetch', fetchMock);
+
+    await fetchOverpass('[out:json];node(0,0,0,0);out;');
+
+    expect(fetchMock).toHaveBeenCalledWith(
+      'https://overpass-api.de/api/interpreter',
+      expect.objectContaining({
+        headers: expect.objectContaining({
+          'user-agent': expect.stringContaining('@mnemopay/map3d'),
+        }),
+      }),
+    );
+  });
+
+  it('allows a consumer to supply its application attribution', async () => {
+    const fetchMock = vi.fn().mockResolvedValue({
+      ok: true,
+      json: async () => ({ elements: [] }),
+    });
+    vi.stubGlobal('fetch', fetchMock);
+
+    await fetchOverpass('query', { userAgent: 'AugEngineMap3D/0.0.1 (info@getbizsuite.com)' });
+
+    const request = fetchMock.mock.calls[0]![1] as RequestInit;
+    expect(request.headers).toEqual(expect.objectContaining({
+      'user-agent': 'AugEngineMap3D/0.0.1 (info@getbizsuite.com)',
+    }));
   });
 });
 

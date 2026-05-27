@@ -40,6 +40,14 @@ const root = buildSceneRoot(scene);
 const glb = await exportGlb(root);
 ```
 
+Node-based production bakes may set their own Overpass attribution:
+
+```ts
+const scene = await fetchScene(bbox, {
+  userAgent: 'YourProduct/1.0 (+https://your-site.example; contact@your-site.example)',
+});
+```
+
 ## API surface
 
 | Subpath | Exports |

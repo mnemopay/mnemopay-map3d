@@ -1,11 +1,14 @@
 import type { BoundingBox, OverpassResponse, OsmElement, OsmNode, OsmWay, Building, Road, Scene, LonLat } from './types.js';
 
 const DEFAULT_ENDPOINT = 'https://overpass-api.de/api/interpreter';
+const DEFAULT_USER_AGENT = '@mnemopay/map3d (+https://github.com/mnemopay/mnemopay-map3d; info@getbizsuite.com)';
 
 export interface FetchOptions {
   endpoint?: string;
   signal?: AbortSignal;
   timeoutMs?: number;
+  /** Attribution sent by Node-based bake tools when contacting Overpass. */
+  userAgent?: string;
 }
 
 export function buildingsAndRoadsQuery(bbox: BoundingBox): string {
@@ -35,7 +38,10 @@ export async function fetchOverpass(
   try {
     const res = await fetch(endpoint, {
       method: 'POST',
-      headers: { 'content-type': 'application/x-www-form-urlencoded' },
+      headers: {
+        'content-type': 'application/x-www-form-urlencoded',
+        'user-agent': opts.userAgent ?? DEFAULT_USER_AGENT,
+      },
       body: new URLSearchParams({ data: query }).toString(),
       signal: sig,
     });
